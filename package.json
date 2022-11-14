@@ -1,0 +1,12 @@
+{
+  "name": "webpack-learning",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Cyurainya/webpack-learning.git",
+  "author": "yannis cyu <1047072111@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "4.41.5",
+    "webpack-cli": "3.3.10"
+  }
+}
