@@ -57,14 +57,22 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 10240, //10K
-              esModule: false,
+              // esModule: false,
               name: '[name]_[hash:6].[ext]',
               outputPath: 'assets'
             }
           }
         ],
         exclude: /node_modules/
-      }
+      },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+        options: {
+          // Disables attributes processing
+          sources: false,
+        },
+      },
     ]
   },
   plugins: [
