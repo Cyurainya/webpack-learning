@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack serve -c ./webpack-config/webpack.config.js --env development",
+    "build": "webpack serve  -c ./webpack-config/webpack.config.js --env production"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,7 @@
     "@babel/preset-env": "^7.20.2",
     "@babel/runtime": "^7.20.6",
     "babel-loader": "^9.1.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "webpack-merge": "^5.8.0"
   }
 }
