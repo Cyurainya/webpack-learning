@@ -2,25 +2,29 @@
  * @Author: yannis cyu
  * @Date: 2022-12-17 16:11:32
  * @LastEditors: yannis
- * @LastEditTime: 2022-12-18 16:22:26
+ * @LastEditTime: 2022-12-18 17:11:40
  * @Description: 请填写简介
  */
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+// const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
-  mode: 'development',
-  entry: './src/index.js',
+  mode:  'development',
+  entry: {
+    index: './src/index.js',
+    another: './src/another-module.js'
+  },
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, './dist'),
+    filename: 'scripts/[name].js',
+    path: path.resolve(__dirname, '../dist'),
     clean: true,
     asyncChunks: true,
-    assetModuleFilename: 'images/[contenthash][ext]'
+    assetModuleFilename: 'images/[contenthash][ext]',
   },
-  devtool: 'eval-source-map',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -58,18 +62,23 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
-            plugins:[
-             [
-              '@babel/plugin-transform-runtime'
-             ]
-            ]
+            plugins: [['@babel/plugin-transform-runtime']]
           }
         }
       }
     ]
   },
   optimization: {
-    minimizer: [new CssMinimizerPlugin()]
+    // minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
